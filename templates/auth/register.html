@@ -1,0 +1,111 @@
+{% extends 'base-page.html' %}
+{% load static %}
+
+{% block title %}
+    XTAZ || Регистрация
+{% endblock title %}
+
+{% block container %}
+        <!-- Categorie Menu & Slider Area End Here -->
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-area mt-30"  id="js-scroll">
+            <div class="container">
+                <div class="breadcrumb">
+                    <ul class="d-flex align-items-center">
+                        <li><a href="{% url 'index' %}">Главная</a></li>
+                        <li class="active"><a href="{% url 'register' %}">Регистрация</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Container End -->
+        </div>
+        <!-- Breadcrumb End -->
+       <!-- Register Account Start -->
+        <div class="register-account ptb-100 ptb-sm-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="register-title">
+                            <h3 class="mb-10">РЕГИСТРАЦИЯ</h3>
+                            <p class="mb-10">Если у Вас уже есть аккаунт, пожалуйста, перейдите на страницу авторизации.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row End -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form method='post' class="form-register" action="{% url 'register' %}">
+                            {% csrf_token %}
+
+                            <fieldset>
+                                <legend>Ваши персональные данные</legend>
+                                <div class="form-group d-md-flex align-items-md-center">
+                                    {% csrf_token %}
+                                    {% for field in user_form %}
+                                    <span class="require">{{ field.errors }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group d-md-flex align-items-md-center">
+                                    <label class="control-label col-md-2"><span class="require">*</span>{{ user_form.first_name.label_tag }}</label>
+                                    <div class="col-md-10">
+                                        {{ user_form.first_name }}
+                                    </div>
+                                </div>
+                                <div class="form-group d-md-flex align-items-md-center">
+                                    <label class="control-label col-md-2"><span class="require">*</span>{{ user_form.last_name.label_tag }}</label>
+                                    <div class="col-md-10">
+                                        {{ user_form.last_name }}
+                                    </div>
+                                </div>
+                                <div class="form-group d-md-flex align-items-md-center">
+                                    <label class="control-label col-md-2"><span class="require">*</span>{{ user_form.email.label_tag }}</label>
+                                    <div class="col-md-10">
+                                        {{ user_form.email }}
+                                    </div>
+                                </div>
+                                <div class="form-group d-md-flex align-items-md-center">
+                                    <label class="control-label col-md-2"><span class="require">*</span>{{ user_form.phone.label_tag }}</label>
+                                    <div class="col-md-10">
+                                        {{ user_form.phone }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group d-md-flex align-items-md-center">
+                                    <label class="control-label col-md-2"><span class="require">*</span>{{ user_form.address.label_tag }}</label>
+                                    <div class="col-md-10">
+                                        {{ user_form.address }}
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Пароль</legend>
+                                <div class="form-group d-md-flex align-items-md-center">
+                                    <label class="control-label col-md-2"><span class="require">*</span>{{ user_form.password.label_tag }}</label>
+                                    <div class="col-md-10">
+                                        {{ user_form.password }}
+                                    </div>
+                                </div>
+                                <div class="form-group d-md-flex align-items-md-center">
+                                    <label class="control-label col-md-2"><span class="require">*</span>{{ user_form.password2.label_tag }}</label>
+                                    <div class="col-md-10">
+                                        {{ user_form.password2 }}
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="terms">
+                                <div class="float-md-right">
+                                    <span>Я прочитал и согласен с <a href="#" class="agree"><b>Политикой конфиденциальности</b></a></span>
+                                    <input type="checkbox" name="agree" value="1"> &nbsp;
+                                    <input type="submit" value="Далее" class="return-customer-btn">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Row End -->
+            </div>
+            <!-- Container End -->
+        </div>
+        <!-- Register Account End -->
+
+{% endblock container %}

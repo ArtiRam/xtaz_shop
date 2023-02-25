@@ -1,0 +1,96 @@
+{% extends 'base-page.html' %}
+{% load static %}
+
+{% block title %}
+    XTAZ || Корзина
+{% endblock title %}
+
+{% block container %}
+<!-- Breadcrumb End -->
+<!-- Cart Main Area Start -->
+<div class="cart-main-area ptb-100 ptb-sm-60" id="js-scroll">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <!-- Form Start -->
+                <form action="#">
+                    <!-- Table Content Start -->
+                    <div class="table-content table-responsive mb-45">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="product-thumbnail">Изображение</th>
+                                    <th class="product-name">Товар</th>
+                                    <th class="product-price">Цена</th>
+                                    <th class="product-quantity">Кол-во</th>
+                                    <th class="product-subtotal">Сумма</th>
+                                    <th class="product-remove">Удалить</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in items %}
+                                <tr>
+                                    <td class="product-thumbnail">
+                                        <a href="#"><img src="{{ item.product.image150x150 }}" alt="cart-image" /></a>
+                                    </td>
+                                    <td class="product-name"><a href="#">{{ item.product }}</a></td>
+                                    <td class="product-price"><span class="amount">{{ item.price }}</span></td>
+                                    <td class="product-quantity"><input type="number" min="1" value="{{ item.quantity }}" /></td>
+                                    <td class="product-subtotal">{{ item.amount }}</td>
+                                    <td class="product-remove">
+                                        <form method="post" action="{% url 'cart_delete_item' item.pk %}">
+                                            {% csrf_token %}
+                                            <button type="submit" style="color: blue"><u>delete</u></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Table Content Start -->
+                    <div class="row">
+                       <!-- Cart Button Start -->
+                        <div class="col-md-8 col-sm-12">
+                            <div class="buttons-cart">
+                                <input type="submit" value="Обновить Корзину" />
+                                <a href="{% url 'shop' %}">Продолжить Покупки</a>
+                            </div>
+                        </div>
+                        <!-- Cart Button Start -->
+                        <!-- Cart Totals Start -->
+                        <div class="col-md-4 col-sm-12">
+                            <div class="cart_totals float-md-right text-md-right">
+                                <h2>К оплате</h2>
+                                <br />
+                                <table class="float-md-right">
+                                    <tbody>
+                                        <tr class="cart-subtotal">
+                                            <th>Без скидки</th>
+                                            <td><span class="amount">{{ cart.amount }}</span></td>
+                                        </tr>
+                                        <tr class="order-total">
+                                            <th>Со скидкой</th>
+                                            <td>
+                                                <strong><span class="amount">{{ cart.amount }}</span></strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="wc-proceed-to-checkout">
+                                    <a href="#">Перейти к оплате</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Cart Totals End -->
+                    </div>
+                    <!-- Row End -->
+                </form>
+                <!-- Form End -->
+            </div>
+        </div>
+         <!-- Row End -->
+    </div>
+</div>
+<!-- Cart Main Area End -->
+{% endblock container %}

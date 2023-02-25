@@ -1,0 +1,105 @@
+{% extends 'base-page.html' %}
+{% load static %}
+
+{% block title %}
+    XTAZ || Товар
+{% endblock title %}
+
+{% block container %}
+<!-- Product Thumbnail Start -->
+<div class="main-product-thumbnail ptb-100 ptb-sm-60" id="js-scroll">
+    <div class="container">
+        <div class="thumb-bg">
+            <div class="row">
+                <!-- Main Thumbnail Image Start -->
+                <div class="col-lg-5 mb-all-40">
+                    <!-- Thumbnail Large Image start -->
+                    <div class="tab-content">
+                    {% if 'http://feed.p5s.ru/images/' in product.image1 %}
+                        <div id="thumb1" class="tab-pane fade show active">
+                            <a data-fancybox="images" href="{{ product.image1 }}" data-resize="400" ><center><img src="{{ product.image1 }}" data-resize="400" alt=""></center></a>
+                        </div>
+                    {% endif %}
+                    {% if 'http://feed.p5s.ru/images/' in product.image2 %}
+                        <div id="thumb2" class="tab-pane fade">
+                            <a data-fancybox="images" href="{{ product.image2 }}" data-resize="400" ><center><img src="{{ product.image2 }}" data-resize="400" alt=""></center></a>
+                        </div>
+                    {% endif %}
+                    {% if 'http://feed.p5s.ru/images/' in product.image3 %}
+                        <div id="thumb3" class="tab-pane fade">
+                            <a data-fancybox="images" href="{{ product.image3 }}" data-resize="400" ><center><img src="{{ product.image3 }}" data-resize="400" alt=""></center></a>
+                        </div>
+                    {% endif %}
+                    {% if 'http://feed.p5s.ru/images/' in product.image4 %}
+                        <div id="thumb4" class="tab-pane fade">
+                            <a data-fancybox="images" href="{{ product.image4 }}" data-resize="400" ><center><img src="{{ product.image4 }}" data-resize="400" alt=""></center></a>
+                        </div>
+                    {% endif %}
+                    {% if 'http://feed.p5s.ru/images/' in product.image5 %}
+                        <div id="thumb5" class="tab-pane fade">
+                            <a data-fancybox="images" href="{{ product.image5 }}" data-resize="400" ><center><img src="{{ product.image5 }}" data-resize="400" alt=""></center></a>
+                        </div>
+                    {% endif %}
+
+                    </div>
+                    <!-- Thumbnail Large Image End -->
+                    <!-- Thumbnail Image End -->
+                    <div class="product-thumbnail mt-15">
+                        <div class="thumb-menu owl-carousel nav tabs-area" role="tablist">
+                            <a class="active" data-toggle="tab" href="{{ product.image1 }}"><img src="{{ product.image1 }}" alt="product-thumbnail"></a>
+                            {% if 'http://feed.p5s.ru/images/' in product.image2 %}
+                            <a data-toggle="tab" href="{{ product.image2 }}"><img src="{{ product.image2 }}" alt="product-thumbnail"></a>
+                            {% endif %}
+                            {% if 'http://feed.p5s.ru/images/' in product.image3 %}
+                            <a data-toggle="tab" href="{{ product.image3 }}"><img src="{{ product.image3 }}" alt="product-thumbnail"></a>
+                            {% endif %}
+                            {% if 'http://feed.p5s.ru/images/' in product.image4 %}
+                            <a data-toggle="tab" href="{{ product.image4 }}"><img src="{{ product.image5 }}" alt="product-thumbnail"></a>
+                            {% endif %}
+                            {% if 'http://feed.p5s.ru/images/' in product.image5 %}
+                            <a data-toggle="tab" href="{{ product.image5 }}"><img src="{{ product.image5 }}" alt="product-thumbnail"></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Thumbnail image end -->
+                </div>
+                <!-- Main Thumbnail Image End -->
+                <!-- Thumbnail Description Start -->
+                <div class="col-lg-7">
+                    <div class="thubnail-desc fix">
+                        <h3 class="product-header">{{ product.name }}</h3>
+                        <div class="pro-price mtb-30">
+                            <p class="d-flex align-items-center"><span class="price">{{ product.price }}</span></p>
+                        </div>
+                        <p class="mb-20 pro-desc-details">{{ product.description }}</p>
+
+                        <div class="box-quantity d-flex hot-product2">
+                            <form method="post" action="{% url 'add_item_to_cart' product.pk %}">
+                                {% csrf_token %}
+                                <input class="quantity mr-15" name="quantity" type="number" min="1" value="1">
+
+                                <div class="pro-actions">
+                                    <div class="buttons-cart-2">
+                                        <input type="submit" value="+ В корзину" />
+                                    </div>
+                                    <div class="actions-secondary">
+                                        <a href="wishlist.html" title="" data-original-title="В список желаемогог"><i class="lnr lnr-heart"></i><span>В список желаемогог</span></a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="pro-ref mt-20">
+                            <p><span class="in-stock"><i class="ion-checkmark-round"></i>В НАЛИЧИИ</span></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Thumbnail Description End -->
+            </div>
+            <!-- Row End -->
+        </div>
+    </div>
+    <!-- Container End -->
+</div>
+<!-- Product Thumbnail End -->
+
+{% endblock container %}

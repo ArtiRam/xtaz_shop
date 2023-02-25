@@ -1,0 +1,72 @@
+{% extends 'base-page.html' %}
+{% load static %}
+
+{% block title %}
+    XTAZ || Главная
+{% endblock title %}
+
+{% block container %}
+        <!-- Categorie Menu & Slider Area End Here -->
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-area mt-30" id="js-scroll">
+            <div class="container">
+                <div class="breadcrumb">
+                    <ul class="d-flex align-items-center">
+                        <li><a href="{% url 'index' %}">Главная</a></li>
+                        <li class="active"><a href="{% url 'login' %}">Вход</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Container End -->
+        </div>
+        <!-- Breadcrumb End -->
+        <!-- LogIn Page Start -->
+        <div class="log-in ptb-100 ptb-sm-60">
+            <div class="container">
+                <div class="row">
+                    <!-- New Customer Start -->
+                    <div class="col-md-6">
+                        <div class="well mb-sm-30">
+                            <div class="new-customer">
+                                <h3 class="custom-title">У нас впервые?</h3>
+                                <p class="mtb-10"><strong>Регистрация</strong></p>
+                                <p>Создав учетную запись, вы сможете совершать покупки быстрее, быть в курсе статуса заказа и отслеживать ранее сделанные вами заказы.</p>
+                                <a class="customer-btn" href="{% url 'register' %}">далее</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- New Customer End -->
+                    <!-- Returning Customer Start -->
+                    <div class="col-md-6">
+                        <div class="well">
+                            <div class="return-customer">
+                                <h3 class="mb-10 custom-title">Вход</h3>
+                                <p class="mb-10"><strong>У меня уже есть аккаунт</strong></p>
+                                <form method='post' action="{% url 'login' %}">
+                                    {% csrf_token %}
+                                    {% for field in login_form %}
+                                    <span class="require">{{ field.errors }}</span>
+                                    {% endfor %}
+                                    <div class="form-group">
+                                        <label>{{ login_form.email.label_tag }}</label>
+                                        {{ login_form.email }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label>{{ login_form.password.label_tag }}</label>
+                                        {{ login_form.password }}
+                                    </div>
+                                    <p class="lost-password"><a href="forgot-password.html">Забыли пароль?</a></p>
+                                    <input type="submit" value="Вход" class="return-customer-btn">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Returning Customer End -->
+                </div>
+                <!-- Row End -->
+            </div>
+            <!-- Container End -->
+        </div>
+        <!-- LogIn Page End -->
+
+{% endblock container %}
